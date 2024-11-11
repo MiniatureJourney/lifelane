@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="LifeLane - Road Traffic Accident Alert System">
+    <meta name="keywords" content="road safety, accident alert, GPS helmet, driver monitoring, insurance">
+    <meta name="author" content="LifeLane Team">
+    <title>LifeLane - Accident Alert System</title>
+    <style>
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes slideIn {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        .fade-in {
+            animation: fadeIn 1.5s ease-out;
+        }
+        .slide-in {
+            animation: slideIn 1.5s ease-out;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(90deg, #0d47a1, #1e88e5);
+            color: #fff;
+            padding: 1rem 0;
+            text-align: center;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        header h1 {
+            font-size: 2.5em;
+            animation: fadeIn 2s;
+        }
+        header p {
+            font-size: 1em;
+            font-weight: 300;
+        }
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            margin-top: 1rem;
+        }
+        nav ul li {
+            margin: 0 20px;
+        }
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+        nav ul li a:hover {
+            color: #ffeb3b;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: url('your-image-url.jpg') no-repeat center center/cover;
+            height: 450px;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+            position: relative;
+        }
+        .hero::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+        }
+        .hero h1 {
+            font-size: 3em;
+            z-index: 1;
+            animation: slideIn 2s;
+        }
+        .hero p {
+            font-size: 1.2em;
+            margin-top: 10px;
+            z-index: 1;
+        }
+
+        /* Section Title */
+        .section-title {
+            font-size: 2.5em;
+            color: #333;
+            margin: 1.5rem 0;
+            position: relative;
+            display: inline-block;
+            animation: fadeIn 1.5s;
+        }
+        .section-title::before {
+            content: "";
+            width: 50px;
+            height: 4px;
+            background-color: #1e88e5;
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            border-radius: 2px;
+        }
+
+        /* About Section */
+        .about, .features, .products, .contact {
+            padding: 3rem 1.5rem;
+            max-width: 1200px;
+            margin: auto;
+            text-align: center;
+            background-color: #fff;
+            border-radius: 10px;
+            margin-top: 2rem;
+            box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Features Section */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        .feature-item {
+            background: #f0f8ff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+        .feature-item:hover {
+            transform: translateY(-10px);
+        }
+        .feature-item h3 {
+            color: #1e88e5;
+            font-size: 1.5em;
+            margin-bottom: 10px;
+        }
+
+        /* Products Section */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            justify-content: center;
+        }
+        .product-item {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            animation: fadeIn 1.5s;
+        }
+        .product-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+        .product-item img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+        .product-item h4 {
+            margin-top: 10px;
+            color: #1e88e5;
+        }
+        .product-item button {
+            background-color: #1e88e5;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .product-item button:hover {
+            background-color: #0d47a1;
+        }
+
+        /* Contact Section */
+        .contact p {
+            font-size: 1.2em;
+            margin: 0.5rem 0;
+        }
+        .contact a {
+            color: #1e88e5;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #333;
+            color: #fff;
+            padding: 1rem;
+            text-align: center;
+            font-size: 0.9em;
+            margin-top: 3rem;
+            box-shadow: 0px -4px 10px rgba(0, 0, 0, 0.2);
+        }
+        footer p {
+            margin-top: 10px;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2em;
+            }
+            .hero p {
+                font-size: 1em;
+            }
+            nav ul {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <h1>LifeLane</h1>
+        <p>Your Road Safety Companion</p>
+        <nav>
+            <ul>
+                <li><a href="#about">About Us</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#products">Products</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>Accident Alert System & GPS Helmet</h1>
+        <p>Stay Safe on the Roads with Real-Time Alerts and Monitoring</p>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <h2 class="section-title">About LifeLane</h2>
+        <p>LifeLane is a comprehensive accident alert system with a smart GPS helmet designed to enhance road safety and provide immediate emergency response. With over 150,000 road fatalities each year in India, our mission is to reduce accident-related fatalities by keeping users and families informed in real-time.</p>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <h2 class="section-title">Key Features</h2>
+        <div class="features-grid">
+            <div class="feature-item">
+                <h3>Real-Time Alerts</h3>
+                <p>Get instant notifications for accidents, road conditions, and traffic hazards.</p>
+            </div>
+            <div class="feature-item">
+                <h3>AI Driver Monitoring</h3>
+                <p>Our AI technology detects fatigue and distractions to keep drivers alert and safe.</p>
+            </div>
+            <div class="feature-item">
+                <h3>Subscription Services</h3>
+                <p>Access to safety gear like helmets and gloves, and manage insurance and penalty payments.</p>
+            </div>
+            <div class="feature-item">
+                <h3>Voice Activation</h3>
+                <p>Hands-free control with voice commands for easier navigation and safety checks.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section id="products" class="products">
+        <h2 class="section-title">Our Products</h2>
+        <div class="product-grid">
+            <div class="product-item">
+                <img src="https://akm-img-a-in.tosshub.com/aajtak/images/story/202203/altor_helmet-sixteen_nine.jpg?size=1200:675" alt="Helmet">
+                <h4>Smart GPS Helmet</h4>
+                <p>Crash detection and emergency alerts.</p>
+                <button>Add to Cart</button>
+            </div>
+            <div class="product-item">
+                <img src="https://m.media-amazon.com/images/I/81Pzt7mve0L.jpg" alt="Safety Kit">
+                <h4>Safety Kit</h4>
+                <p>Includes helmet, gloves, and essential safety gear.</p>
+                <button>Add to Cart</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <h2 class="section-title">Contact Us</h2>
+        <p>Email: <a href="mailto:lifelane123@gmail.com">lifelane123@gmail.com</a> | Phone: +91 1234567890</p>
+        <p>Address: 123 Safety Drive, City, India</p>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 LifeLane | All rights reserved.</p>
+    </footer>
+
+</body>
+</html>
